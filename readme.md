@@ -1,4 +1,4 @@
-# Technical Exercice for first recruitment stage
+# Technical Exercise for first recruitment stage
 
 You can choose between Frontend, Mobile, or Backend exercise.
 
@@ -8,8 +8,8 @@ Your submission :
 - Fork this repository
 - Work on your Fork
 - Submit a pull request when you're done
-- For Frontend and Backend exercises, you must publish the result on a Web Server
-- For Mobile exercise, you must send us the .apk or iOS app so that we can install it on our phones
+- For [Frontend](#frontend) and [Backend](#backend) exercises, you must publish the result on a Web Server
+- For [Mobile](#mobile) exercise, you must send us the .apk or iOS app so that we can install it on our phones
 
 ## Frontend
 
@@ -167,3 +167,13 @@ Your backend must expand it to output a structured and labelled tree like this :
 ```
 
 ## Mobile
+
+### iTunes Store Lookup App
+
+Create an app that lets you do simple searches using [Apple's iTunes Store API](https://affiliate.itunes.apple.com/resources/documentation/itunes-store-web-service-search-api/).
+
+For example to obtain all the entries of the musics corresponding to U2:
+
+https://itunes.apple.com/search?term=U2&media=music
+
+You are free in the choice of library and display but you must return a project coded in Swift for iOS or Kotlin/Java for Android. You are also free regarding the display of data, the layout and navigation in the app.
