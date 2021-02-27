@@ -1,0 +1,56 @@
+<!-- Formulaire pour les joueurs -->
+<div class="cadre">
+
+    <!-- Pseudo -->
+    <div class="elements">
+
+        <form [formGroup]="playerForm" (ngSubmit)="submitForm()"> 
+
+
+            <mat-form-field appearance="legacy"> <!-- mat-form-field can contains : <input matNativeControl> & <textarea matNativeControl> ; 
+                                                    <select matNativeControl> ; <mat-select> ; <mat-chip-list> -->
+                                                    <!-- appearance can take : legacy, fill or outline -->
+            <mat-label>Enter a pseudo</mat-label> <!-- for floating label -->
+            <input matNativeControl>
+            </mat-form-field>
+
+        <br> 
+
+        <!-- ajout test -->
+       <!-- <input type="text" placeholder="pseudo" [formControl]="playerForm.controls.pseudo"> -->
+       <input type="text" placeholder="pseudo" formControlName="pseudo">
+        <br>
+        <!-- fin test -->
+
+        <!-- Color of the pawn -->
+        
+            <mat-form-field appearance="legacy">
+                <mat-label>Pawn's Color</mat-label>
+                <!--<mat-select [formControl]="playerForm.controls.color">-->
+                <mat-select formControlName="color">   
+                <mat-option value="red">Red</mat-option>
+                <mat-option value="yellow">Yellow</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+        <br>
+        <br>
+        <br>
+
+            <button class="rulesButton" [routerLink]="['/rules']" mat-raised-button>Rules</button>
+            <button type="button" class="playButton" [routerLink]="['/grid']" mat-raised-button (click)="submitForm()">Play !</button>
+            <!--<button type="button" class="playButton" mat-raised-button (click)="submitForm()">Play !</button>-->
+        
+        </form>
+
+
+        <!-- test -->
+        <h1>{{ playerForm.value.pseudo }}</h1>
+        <h2>{{ playerForm.value.color }}</h2>
+
+
+      <app-grid>Bonjour</app-grid>
+    
+    </div>
+
+</div>
