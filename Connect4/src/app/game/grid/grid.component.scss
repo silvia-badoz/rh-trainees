@@ -1,0 +1,42 @@
+.background {
+    background-color: lightcyan;
+    text-align: center;
+    //display: flex;
+}
+
+.restart {
+    margin: 0 auto;
+}
+
+.restartButton {
+    background-color: greenyellow;
+    color: black;
+    font-size: 25px;
+    padding: 6px 16px;
+    border-radius: 40px;
+}
+
+.grid {
+    margin: 0 auto; 
+    margin-top : 10px; 
+    width: 40%;
+    //height: 100%;
+   //text-align: center;
+}
+
+.grid table {
+    border: 3px blue outset;
+    background-color: blue;
+}
+
+.grid td {
+    width: 2cm; //50px
+    height: 2cm; //50px 
+    margin: 0px; //5px pour espacer les ronds 
+    padding: 0px;
+    border: 2px blue inset;
+    border-radius: 2cm; //50% = cercle 
+    background-color: white; //
+    //display : inline-block  
+    cursor: pointer;
+}

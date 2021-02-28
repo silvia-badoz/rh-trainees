@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 
+//MatDialog
+import { MatDialog } from '@angular/material/dialog'; 
+import { GridComponent } from '../grid/grid.component';
+
+
 @Component({
   selector: 'app-player',
   templateUrl: './player.component.html',
@@ -20,9 +25,19 @@ export class PlayerComponent implements OnInit {
     pseudo: new FormControl(),
     color: new FormControl() 
   }); */ 
-  playerForm: FormGroup; 
+  public playerForm: FormGroup; 
 
-  constructor(private fb : FormBuilder) { }
+  //
+  public name = "Sisi";
+  public message = "";  
+
+  //MatDialog
+  constructor(private fb : FormBuilder, public dialog: MatDialog) { }
+
+  /*MatDialog 
+  openDialog() {
+    this.dialog.open(GridComponent);
+  } */
 
   ngOnInit() {
     this.initializeForm();
@@ -30,8 +45,10 @@ export class PlayerComponent implements OnInit {
 
   initializeForm(): void {
     this.playerForm = this.fb.group({
-       pseudo: '',
-       color: ''
+       pseudo1: '',
+       color1: '',
+       pseudo2: '',
+       color2: ''
     });
   }
 
