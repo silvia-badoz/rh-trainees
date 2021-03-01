@@ -12,74 +12,137 @@
 
     </div> -->
 
-    <div class="grid">
-        <table>
+        <!-- TEST CHANGER CLASS 
+        <div class="my_class" (click)="clickEvent()"  
+        [ngClass]="status ? 'success' : 'danger'">                
+         Some content
+        </div> -->
+
+
+        <div class="grid">
+            <table>
+                <tr>
+                    <td *ngIf="turn" class="w" [ngClass]="status1B ? '' : 'y'">1</td>
+                    <td *ngIf="!turn" class="w" [ngClass]="status1 ? 'y' : 'r'">1R</td>
+
+                    <td *ngIf="turn" class="w" [ngClass]="status1B ? '' : 'y'">2</td>
+                    <td *ngIf="!turn" class="w" [ngClass]="status1 ? 'y' : 'r'">2R</td>
+
+
+                    <!--<td *ngIf="status1 ; else changeColor" class="w" [ngClass]="status1 ? '' : 'r'" >1</td>
+                    <ng-template #changeColor>
+                        <td class="w" [ngClass]="status1B ? '' : 'y'" >1yellow</td>
+                    </ng-template>-->
+                    <!--<td class="w" [ngClass]="status2 ? 'r' : 'y'">2</td>-->
+                    <!--<td class="w">3</td>
+                    <td class="w" >Tour rouge</td>-->
+                </tr>
+
+            </table>
+        </div>
+
+                       <!-- *ngIf="playerForm.value.pseudo1 != playerForm.value.pseudo2 
+                        ; else editingPseudo"-->
+
+        
+
+
+    <!--<div class="grid">-->
+        <!--<table *ngFor="let case of testPlay()" [ngClass]="(!case.played ? 'w' : 'r')">-->
+            <!--<table>
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td id="0" class="w" [(ngModel)]="case.played"></td>
+                <td class="w"></td>
+                <td class="w"></td>
+                <td class="w"></td>
+                <td class="w"></td>
+                <td class="w"></td>
+                <td class="w"></td>
             </tr>
     
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td class="w"></td>
+                <td class="w"></td>
+                <td class="w"></td>
+                <td class="w"></td>
+                <td class="w"></td>
+                <td class="w"></td>
+                <td class="w"></td>
             </tr>
     
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td class="w"></td>
+                <td class="w"></td>
+                <td class="w"></td>
+                <td class="w"></td>
+                <td class="w"></td>
+                <td class="w"></td>
+                <td class="w"></td>
             </tr>
     
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td class="w"></td>
+                <td class="w"></td>
+                <td class="w"></td>
+                <td class="w"></td>
+                <td class="w"></td>
+                <td class="w"></td>
+                <td class="w"></td>
             </tr>
     
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td class="w"></td>
+                <td class="w"></td>
+                <td class="w"></td>
+                <td class="w"></td>
+                <td class="w"></td>
+                <td class="w"></td>
+                <td class="w"></td>
             </tr>
     
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+            <tr>-->
+                <!--<td (click)="testPlay()"></td>-->
+                <!--<td class="w"></td>
+                <td class="w"></td>
+                <td class="w"></td>
+                <td class="w"></td>
+                <td class="w"></td>
+                <td class="w"></td>
+                <td class="w"></td>
             </tr>
         </table>
+    </div>-->
+
+    <br> 
+
+        <!-- FAIRE LES 7 BOUTONS FLÈCHES -->
+        <div>
+            <button *ngIf="turn" (click)="Jouer1R()">J1 Rouge</button>
+        </div>
+        <div>
+            <button id='0' *ngIf="!turn" (click)="Jouer1Y()">J1 Jaune</button>
+        </div>
+
+
+        
+
+       <!-- <span>
+            <button id='1' (click)="Jouer2()">Jouer2</button>
+        </span> -->
+
+    <br>
+<!--
+    <div class="restart">
+        <button class="restartButton" [routerLink]="['/grid']" mat-raised-button>Play again !</button>
     </div>
 
     <br>
 
-    <div class="restart">
-        <button class="restartButton" mat-raised-button>Play again !</button>
+    <div class="changePlayers">
+        <button class="changeP" [routerLink]="['/player']" mat-raised-button>Change players</button>
     </div>
-    
+
+
+
+    -->
 </div>

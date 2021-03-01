@@ -3,7 +3,9 @@ import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 
 //MatDialog
 import { MatDialog } from '@angular/material/dialog'; 
-import { GridComponent } from '../grid/grid.component';
+import { ErrComponent } from '../err/err.component';
+import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -11,39 +13,20 @@ import { GridComponent } from '../grid/grid.component';
   templateUrl: './player.component.html',
   styleUrls: ['./player.component.scss']
 })
-/* export class PlayerComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-}  */
 
 export class PlayerComponent implements OnInit {
-  /*playerForm = new FormGroup({
-    pseudo: new FormControl(),
-    color: new FormControl() 
-  }); */ 
+
   public playerForm: FormGroup; 
 
-  //
-  public name = "Sisi";
-  public message = "";  
-
   //MatDialog
-  constructor(private fb : FormBuilder, public dialog: MatDialog) { }
+  constructor(private fb : FormBuilder, public dialog: MatDialog, private router : Router) { }
 
-  /*MatDialog 
-  openDialog() {
-    this.dialog.open(GridComponent);
-  } */
-
-  ngOnInit() {
+  ngOnInit() { 
     this.initializeForm();
   }
 
-  initializeForm(): void {
+  //ReactiveForm 
+  initializeForm(): void { 
     this.playerForm = this.fb.group({
        pseudo1: '',
        color1: '',
@@ -54,6 +37,17 @@ export class PlayerComponent implements OnInit {
 
   submitForm() { 
    console.log(this.playerForm.value);  
+  }
+
+  //MatDialog 
+  openDialog() {
+    this.dialog.open(ErrComponent);
+    this.router.navigate(['/player']);
+  } 
+
+  //test
+  goToGame() {
+    this.router.navigate(['/grid']);
   }
 
 } 

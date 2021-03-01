@@ -2,20 +2,27 @@
     background-color: blue;
     text-align: center;
     width: 80%;
-    height: 300px;
+    height: 400px;
     margin: 0 auto;
     margin-top: 1.8%;
     display: flex;
 }
 
-.playButton {
-    background-color: yellowgreen;
-    color: white;
-    font-size: 25px;
-    padding: 8px 20px;
-    border-radius: 40px;
+.elements { 
+    margin: auto;
+    
 }
 
+.err {
+    color: red;
+    //font-size: bold;
+}
+
+.welcome {
+    color: black;
+}
+
+//bouton rules
 .rulesButton {
     background-color: darkred;
     color: white;
@@ -25,9 +32,83 @@
     margin-right: 12px;
 }
 
-.elements { 
-    margin: auto;
-    
+.rulesButton:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    background-color: darkred;
+    color: black;
 }
 
+.rulesButton span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
 
+.rulesButton span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+.rulesButton:hover span {
+    padding-right: 25px;
+  }
+  
+.rulesButton:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+
+.rulesButton:active {
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+
+//bouton play
+.playButton {
+    background-color: yellowgreen;
+    color: white;
+    font-size: 25px;
+    padding: 8px 20px;
+    border-radius: 40px;
+}
+
+.playButton:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    background-color: yellowgreen;
+    color: black;
+}
+
+.playButton span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+
+.playButton span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+.playButton:hover span {
+    padding-right: 25px;
+  }
+  
+.playButton:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+
+.playButton:active {
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }

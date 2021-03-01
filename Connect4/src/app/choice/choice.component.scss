@@ -13,8 +13,8 @@
 }
 //BUTON START NEW GAME
 #startgame {
-    background-color: yellow;
-    color: red;
+    background-color: yellowgreen;
+    color: white;
     font-size: 25px;
     padding: 10px 24px;
     border-radius: 40px;
@@ -22,8 +22,8 @@
 
 #startgame:hover {
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-    background-color: red;
-    color: yellow;
+    background-color: yellowgreen;
+    color: black;
 }
 
 #startgame span {
@@ -59,15 +59,15 @@
 //BUTON RULES
 #rules {
     background-color: darkred;
-    color: yellow;
+    color: white;
     font-size: 25px;
     padding: 10px 24px;
     border-radius: 40px;
 }
 #rules:hover {
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-    background-color: yellow;
-    color: red;
+    background-color: darkred;
+    color: black;
 }
 
 #rules span {

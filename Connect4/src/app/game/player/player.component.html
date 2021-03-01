@@ -4,6 +4,8 @@
     <!-- Player 1-->
     <div class="elements">
 
+        <h2 class="welcome">Welcome</h2>
+
         <form [formGroup]="playerForm" (ngSubmit)="submitForm()"> 
 
 
@@ -34,7 +36,7 @@
             <input matNativeControl formControlName="pseudo2">
             </mat-form-field>
 
-        <br> 
+        <br>
             <!-- le player 2 prend la couleur inverse au player 1 -->
             <mat-form-field appearance="legacy">
                 <mat-label>Pawn's Color</mat-label>
@@ -46,17 +48,14 @@
 
         <br>
 
-
-
             <button class="rulesButton" [routerLink]="['/rules']" mat-raised-button>Rules</button>
-            <button type="button" class="playButton" [routerLink]="['/grid']" mat-raised-button (click)="submitForm()">Play !</button>
-            <!--<button type="button" class="playButton" mat-raised-button (click)="submitForm()">Play !</button>-->
 
-
-            <!-- Test MatDialog 
-            <button mat-raised-button (click)="openDialog()">Open Dialog</button>
-            --> 
-        
+            <!-- MAT DIALOG conditions formulaire joueurs -->
+            <button type="button" class="playButton" mat-raised-button *ngIf="playerForm.value.pseudo1 != playerForm.value.pseudo2 && playerForm.value.pseudo2 != ''; else editingPseudo" (click)="goToGame()">Play</button>
+            <ng-template #editingPseudo>
+                <button type="button" class="playButton" (click)="openDialog()">Play !</button>
+            </ng-template>
+                
         </form>
 
 

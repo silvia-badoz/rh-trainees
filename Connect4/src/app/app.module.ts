@@ -25,6 +25,8 @@ import { RulesComponent } from './rules/rules.component';
 import { ChoiceComponent } from './choice/choice.component';
 import { PlayerComponent } from './game/player/player.component';
 import { GridComponent } from './game/grid/grid.component';
+import { ErrComponent } from './game/err/err.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 
 @NgModule({
@@ -33,10 +35,12 @@ import { GridComponent } from './game/grid/grid.component';
     RulesComponent,
     ChoiceComponent,
     PlayerComponent,
-    GridComponent
+    GridComponent,
+    ErrComponent,
+    ToolbarComponent
   ],
   //MatDialog
-  entryComponents: [GridComponent],
+  entryComponents: [ErrComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
