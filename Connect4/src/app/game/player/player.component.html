@@ -51,14 +51,20 @@
             <button class="rulesButton" [routerLink]="['/rules']" mat-raised-button>Rules</button>
 
             <!-- MAT DIALOG conditions formulaire joueurs -->
-            <button type="button" class="playButton" mat-raised-button *ngIf="playerForm.value.pseudo1 != playerForm.value.pseudo2 && playerForm.value.pseudo2 != ''; else editingPseudo" (click)="goToGame()">Play</button>
+            <!--<button type="button" class="playButton" mat-raised-button *ngIf="playerForm.value.pseudo1 != playerForm.value.pseudo2 && playerForm.value.pseudo2 != ''; else editingPseudo" (click)="goToGame()">Play !</button>
             <ng-template #editingPseudo>
                 <button type="button" class="playButton" (click)="openDialog()">Play !</button>
             </ng-template>
-                
+              -------------->    
+
+            <!-- TEST -------------------->
+            <button type="button" class="playButton" [routerLink]="['/grid']" mat-raised-button *ngIf="playerForm.value.pseudo1 != playerForm.value.pseudo2 && playerForm.value.pseudo2 != ''; else editingPseudo" (click)="submitForm()">Play !</button>
+            <ng-template #editingPseudo>
+                <button type="button" class="playButton" (click)="openDialog()">Play !</button>
+            </ng-template>
+            <!--   ------------>
         </form>
-
-
+       
         <!-- test -->
        <!-- <h1>{{ playerForm.value.pseudo }}</h1>
         <h2>{{ playerForm.value.color }}</h2>

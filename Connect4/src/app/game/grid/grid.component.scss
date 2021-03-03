@@ -1,9 +1,10 @@
 .background {
     background-color: lightcyan;
-    text-align: center;
     //display: flex;
     //height: 120%;
     //line-height: 120%;
+    text-align: center;
+    margin: 0 auto; 
 }
 
 .restart {
@@ -13,43 +14,39 @@
 .restartButton {
     background-color: greenyellow;
     color: black;
-    font-size: 25px;
-    padding: 6px 16px;
+    font-size: 16px;
+    padding: 6px 10px;
     border-radius: 40px;
 }
 
 .changeP {
     background-color: cyan;
     color: black;
-    font-size: 20px;
-    padding: 6px 16px;
+    font-size: 14px;
+    padding: 6px 10px;
     border-radius: 40px;
+    margin-right: 10px;
 }
 
-.grid {
-    margin: 0 auto; 
-    margin-top : 10px; 
-    width: 40%;
-    height: 50%;
-   //text-align: center;
-}
-
-.grid table {
-    border: 3px blue outset;
-    background-color: blue;
-}
-
-/*.grid td {
-    width: 2cm; //50px
-    height: 2cm; //50px 
-    margin: 0px; //5px pour espacer les ronds 
-    padding: 0px;
-    border: 2px blue inset;
-    border-radius: 2cm; //50% = cercle 
-    background-color: white; //
-    //display : inline-block  
+.play-r {
+    background-color: red;
+    margin: 0 auto;
     cursor: pointer;
-}*/
+    font-size: 22px;
+    padding: 6px 14px;
+    border-radius: 40px;
+    margin-right: 8px;
+}
+
+.play-j {
+    background-color: yellow;
+    margin: 0 auto;
+    cursor: pointer;
+    font-size: 22px;
+    padding: 6px 14px;
+    border-radius: 40px;
+    margin-right: 8px;
+}
 
 .w {
     width: 2cm; //50px
@@ -63,8 +60,6 @@
     cursor: pointer;
 }
 
-//test placer un pion
-//class w, r, y 
 .r {
     width: 2cm; //50px
     height: 2cm; //50px 
@@ -89,11 +84,48 @@
     cursor: pointer;
 }
 
-
 .success {
-    color: blue;
+    color: green;
 }
 
 .danger {
-    color: green;
+    color: red;
+}
+
+#equipeR {
+    background-color: black;
+    color: red;
+}
+
+#equipeJ {
+    background-color: black;
+    color: yellow;
+}
+
+.grille__div {
+    //border: solid black; 
+    margin: 0 auto; 
+}
+
+.grille__div table {
+    margin: 0 auto; 
+
+    border: 3px blue outset;
+    background-color: blue;
+    text-align: center;   
+}
+
+.case {
+    width: 2cm; //50px
+    height: 2cm; //50px 
+    margin: 0px; //5px pour espacer les ronds 
+    padding: 0px;
+    border: 2px blue inset;
+    border-radius: 2cm; //50% = cercle 
+    background-color: white; //
+    
+}
+
+.affichage__h4 {
+    font-family: fantasy;
 }

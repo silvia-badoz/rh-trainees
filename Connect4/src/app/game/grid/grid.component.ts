@@ -1,7 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { BoardService } from 'src/app/services/board.service';
-import { CaseData } from 'src/app/interface/case-data';
 //import EventEmitter = require('events');
+import { ColorCaseComponent } from '../color-case/color-case.component';
+
+import { PlayerService } from 'src/app/services/player.service';
+import { CaseData } from 'src/app/interface/case-data';
+import { JeuInfos } from 'src/app/interface/jeu-infos';
 
 @Component({
   selector: 'app-grid',
@@ -12,79 +16,576 @@ import { CaseData } from 'src/app/interface/case-data';
 
 
 export class GridComponent implements OnInit {
-
-  status1: boolean = true; //colonne 1 --> rouge
-  status1B: boolean = true; //colonne1 --> jaune 
-
-  status2: boolean = true; 
+  
+  public infos: JeuInfos; 
 
   turn:boolean = true; //True = tour du player rouge
+  status:boolean = false; 
+
+  compteTest = 0; //placer 1 seul pion
+
+  //hide play button when col is full
+  isButtonVisible1 = true; 
+  isButtonVisible2 = true;
+  isButtonVisible3 = true;
+  isButtonVisible4 = true;
+  isButtonVisible5 = true;
+  isButtonVisible6 = true;
+  isButtonVisible7 = true;
 
 
-  //public grille: number[];
-  //public grille = []; 
-  //counter:number = 4;
   col:number = 7; 
   row:number = 6; 
   redPawns: number = 21;
-  yellowPawns:number = 21;  
-  winner:boolean = false;
-  white = "0"; 
-  red = "1";
-
-  //grille2 : string[] = [];
-
+  //yellowPawns:number = 21;  
+  //winner:boolean = false;
   //service
   grille3: number[][]; 
- //grille3: [][]; 
 
-  //couleur: string;
   public case: CaseData; 
-  filter: string; 
   
 
-  /*const WHITE = 0; 
-  const RED = 1; 
-  const YELLOW = 2;*/
-
-  constructor(public boardservice: BoardService) { }
-
-  ngOnInit(): void {
-    console.log("TEST onInit ok");
-    //this.initializeTable()
-    this.grille3 = this.boardservice.emptyGrid; //initialise la grille depuis le service 
-    //console.log("My board looks like this : " + this.grille3); 
-
-    console.log("OnInit variable TURN = " + this.turn);
-
-    //this.case.played = false; 
-
-    //this.couleur = "white"; 
-    /*for (let i = 0 ; i < this.col ; i++) {
-      this.case.played = false; 
-    }*/
-  
-    //this.gameState(); 
+  //constructor(public boardservice: BoardService) { }
+  constructor(public boardservice: BoardService, playerService: PlayerService) { 
+    playerService.getGameDataObservable().subscribe(infos => this.infos = infos );
   }
 
-  get played(): boolean {
-    return this.case.played; 
+  ngOnInit():void {
+    this.grille3 = this.boardservice.emptyGrid; //initialise la grille à 0 (white) dans chaque case depuis le service
+    console.log("My board looks like this : " + this.grille3);
+    console.table(this.grille3); 
   }
-  get color(): boolean {
-    return this.case.color;
-    
+
+//fonction qui vérifie si il y a un gagnant 
+//test
+  verif() {
+    if (this.grille3[5][0] === 1) {
+      this.turn = !this.turn; 
+      console.log("VERIF, new turn = " + this.turn); 
+    }
+  }
+
+//--------------------- FONCTIONS POUR PLACER LES PIONS DANS GRILLE3 -----------------------------------------
+colonne1Rouge(this:GridComponent) { 
+  for (let j = 0 ; ; ) { //colonne1
+    for (let i = 5 ; i >=0 ; i--) { 
+      if (this.grille3[i][j] === 1 || this.grille3[i][j] === 2) {
+        //console.log("JE SUIS DANS LE IF"); 
+      }
+      else {
+        this.grille3[i][j] = 1; //1 vaut 1 pion rouge
+
+        //changer couleur case 
+        this.status=!this.status; 
+        //console.log("STATUS : " +this.status);
+        //
+
+        this.compteTest = 1; //var prend 1 au lieu de 0  
+        if (this.compteTest === 1) {
+          break; //permet de ne placer qu'UN SEUL pion
+        }     
+      } 
+    }
+    //Fait disparaître le bouton si la colonne est remplie 
+    if (this.grille3[0][0] === 1 || this.grille3[0][0] === 2) {
+      this.isButtonVisible1 = false; 
+    }
+    //
+    this.turn=!this.turn; //passer au tour des jaunes 
+    break; //sinon boucle infinie 
+  }
+  console.log("1 PION ROUGE PLACÉ !");
+  console.log("New board : " + this.grille3); 
+  console.table(this.grille3); 
+
 }
- 
+
+colonne1Jaune(this:GridComponent) {
+  for (let j = 0 ; ; ) { //colonne1
+    for (let i = 5 ; i >=0 ; i--) { 
+      if (this.grille3[i][j] === 1 || this.grille3[i][j] === 2) {
+        //console.log("JE SUIS DANS LE IF"); 
+      }
+      else {
+        this.grille3[i][j] = 2; //2 vaut 1 pion jaune
+
+        //changer couleur case
+        this.status=!this.status; 
+        //console.log("STATUS : " +this.status);
+        //
+
+        this.compteTest = 1; //var prend 1 au lieu de 0  
+        if (this.compteTest === 1) {
+          break; //permet de ne placer qu'UN SEUL pion
+        }     
+      } 
+    }
+    //Fait disparaître le bouton si la colonne est remplie 
+    if (this.grille3[0][0] === 1 || this.grille3[0][0] === 2) {
+      this.isButtonVisible1 = false; 
+    }
+    //
+    this.turn=!this.turn; //passer au tour des rouges 
+    break; //sinon boucle infinie 
+  }
+  console.log("1 PION JAUNE PLACÉ !");
+  console.log("New board : " + this.grille3);
+  console.table(this.grille3);
+}
+
+colonne2Rouge(this:GridComponent) {
+for (let j = 1 ; ; ) { 
+    for (let i = 5 ; i >=0 ; i--) { 
+      if (this.grille3[i][j] === 1 || this.grille3[i][j] === 2) {
+        //console.log("JE SUIS DANS LE IF"); 
+      }
+      else {
+        this.grille3[i][j] = 1;
+
+        //changer couleur case 
+        this.status=!this.status; 
+        //console.log("STATUS : " +this.status);
+        //
+
+        this.compteTest = 1;   
+        if (this.compteTest === 1) {
+          break; 
+        }     
+      } 
+    }
+    //Fait disparaître le bouton si la colonne est remplie 
+    if (this.grille3[0][1] === 1 || this.grille3[0][1] === 2) {
+      this.isButtonVisible2 = false; 
+    }
+    //
+    this.turn=!this.turn;  
+    break; 
+  }
+  console.log("1 PION ROUGE PLACÉ !");
+  console.log("New board : " + this.grille3); 
+  console.table(this.grille3);
+}
+
+colonne2Jaune(this:GridComponent) {
+  for (let j = 1 ; ; ) { 
+    for (let i = 5 ; i >=0 ; i--) { 
+      if (this.grille3[i][j] === 1 || this.grille3[i][j] === 2) {
+        //console.log("JE SUIS DANS LE IF"); 
+      }
+      else {
+        this.grille3[i][j] = 2; 
+
+        //changer couleur case 
+        this.status=!this.status; 
+        //console.log("STATUS : " +this.status);
+        //
+
+        this.compteTest = 1; 
+        if (this.compteTest === 1) {
+          break; 
+        }     
+      } 
+    }
+    //Fait disparaître le bouton si la colonne est remplie 
+    if (this.grille3[0][1] === 1 || this.grille3[0][1] === 2) {
+      this.isButtonVisible2 = false; 
+    }
+    //
+    this.turn=!this.turn; 
+    break; 
+  }
+  console.log("1 PION JAUNE PLACÉ !");
+  console.log("New board : " + this.grille3); 
+  console.table(this.grille3);
+}
+
+colonne3Rouge(this:GridComponent) {
+  for (let j = 2 ; ; ) { 
+      for (let i = 5 ; i >=0 ; i--) { 
+        if (this.grille3[i][j] === 1 || this.grille3[i][j] === 2) {
+          //console.log("JE SUIS DANS LE IF"); 
+        }
+        else {
+          this.grille3[i][j] = 1; 
+  
+          //changer couleur case 
+          this.status=!this.status; 
+          //console.log("STATUS : " +this.status);
+          //
+  
+          this.compteTest = 1;   
+          if (this.compteTest === 1) {
+            break; 
+          }     
+        } 
+      }
+      //Fait disparaître le bouton si la colonne est remplie 
+      if (this.grille3[0][2] === 1 || this.grille3[0][2] === 2) {
+        this.isButtonVisible3 = false; 
+      }
+      //
+      this.turn=!this.turn; 
+      break; 
+    }
+    console.log("1 PION ROUGE PLACÉ !");
+    console.log("New board : " + this.grille3); 
+    console.table(this.grille3);
+  }
+
+colonne3Jaune(this:GridComponent) {
+    for (let j = 2 ; ; ) { 
+        for (let i = 5 ; i >=0 ; i--) { 
+          if (this.grille3[i][j] === 1 || this.grille3[i][j] === 2) {
+            //console.log("JE SUIS DANS LE IF"); 
+          }
+          else {
+            this.grille3[i][j] = 2; 
+    
+            //changer couleur case 
+            this.status=!this.status; 
+            //console.log("STATUS : " +this.status);
+            //
+    
+            this.compteTest = 1;   
+            if (this.compteTest === 1) {
+              break; 
+            }     
+          } 
+        }
+        //Fait disparaître le bouton si la colonne est remplie 
+        if (this.grille3[0][2] === 1 || this.grille3[0][2] === 2) {
+          this.isButtonVisible3 = false; 
+        }
+        //
+        this.turn=!this.turn; 
+        break; 
+      }
+      console.log("1 PION JAUNE PLACÉ !");
+      console.log("New board : " + this.grille3); 
+      console.table(this.grille3);
+}
+
+colonne4Rouge(this:GridComponent) {
+      for (let j = 3 ; ; ) { 
+          for (let i = 5 ; i >=0 ; i--) { 
+            if (this.grille3[i][j] === 1 || this.grille3[i][j] === 2) {
+              //console.log("JE SUIS DANS LE IF"); 
+            }
+            else {
+              this.grille3[i][j] = 1; 
+      
+              //changer couleur case 
+              this.status=!this.status; 
+              //console.log("STATUS : " +this.status);
+              //
+      
+              this.compteTest = 1;   
+              if (this.compteTest === 1) {
+                break; 
+              }     
+            } 
+          }
+          //Fait disparaître le bouton si la colonne est remplie 
+          if (this.grille3[0][3] === 1 || this.grille3[0][3] === 2) {
+            this.isButtonVisible4 = false; 
+          }
+          //
+          this.turn=!this.turn; 
+          break; 
+        }
+        console.log("1 PION ROUGE PLACÉ !");
+        console.log("New board : " + this.grille3); 
+        console.table(this.grille3);
+}
+
+colonne4Jaune(this:GridComponent) {
+        for (let j = 3 ; ; ) { 
+            for (let i = 5 ; i >=0 ; i--) { 
+              if (this.grille3[i][j] === 1 || this.grille3[i][j] === 2) {
+                //console.log("JE SUIS DANS LE IF"); 
+              }
+              else {
+                this.grille3[i][j] = 2; 
+        
+                //changer couleur case 
+                this.status=!this.status; 
+                //console.log("STATUS : " +this.status);
+                //
+        
+                this.compteTest = 1;   
+                if (this.compteTest === 1) {
+                  break; 
+                }     
+              } 
+            }
+            //Fait disparaître le bouton si la colonne est remplie 
+            if (this.grille3[0][3] === 1 || this.grille3[0][3] === 2) {
+              this.isButtonVisible4 = false; 
+            }
+            //
+            this.turn=!this.turn; 
+            break; 
+          }
+          console.log("1 PION JAUNE PLACÉ !");
+          console.log("New board : " + this.grille3); 
+          console.table(this.grille3);
+}
+
+colonne5Rouge(this:GridComponent) {
+          for (let j = 4 ; ; ) { 
+              for (let i = 5 ; i >=0 ; i--) { 
+                if (this.grille3[i][j] === 1 || this.grille3[i][j] === 2) {
+                  //console.log("JE SUIS DANS LE IF"); 
+                }
+                else {
+                  this.grille3[i][j] = 1; 
+          
+                  //changer couleur case 
+                  this.status=!this.status; 
+                  //console.log("STATUS : " +this.status);
+                  //
+          
+                  this.compteTest = 1;   
+                  if (this.compteTest === 1) {
+                    break; 
+                  }     
+                } 
+              }
+              //Fait disparaître le bouton si la colonne est remplie 
+              if (this.grille3[0][4] === 1 || this.grille3[0][4] === 2) {
+                this.isButtonVisible5 = false; 
+              }
+              //
+              this.turn=!this.turn; 
+              break; 
+            }
+            console.log("1 PION ROUGE PLACÉ !");
+            console.log("New board : " + this.grille3); 
+            console.table(this.grille3);
+}
+
+colonne5Jaune(this:GridComponent) {
+            for (let j = 4 ; ; ) { 
+                for (let i = 5 ; i >=0 ; i--) { 
+                  if (this.grille3[i][j] === 1 || this.grille3[i][j] === 2) {
+                    //console.log("JE SUIS DANS LE IF"); 
+                  }
+                  else {
+                    this.grille3[i][j] = 2; 
+            
+                    //changer couleur case 
+                    this.status=!this.status; 
+                    //console.log("STATUS : " +this.status);
+                    //
+            
+                    this.compteTest = 1;   
+                    if (this.compteTest === 1) {
+                      break; 
+                    }     
+                  } 
+                }
+                //Fait disparaître le bouton si la colonne est remplie 
+                if (this.grille3[0][4] === 1 || this.grille3[0][4] === 2) {
+                  this.isButtonVisible5 = false; 
+                }
+                //
+                this.turn=!this.turn; 
+                break; 
+              }
+              console.log("1 PION JAUNE PLACÉ !");
+              console.log("New board : " + this.grille3); 
+              console.table(this.grille3);
+}
+
+colonne6Rouge(this:GridComponent) {
+  for (let j = 5 ; ; ) { 
+    for (let i = 5 ; i >=0 ; i--) { 
+      if (this.grille3[i][j] === 1 || this.grille3[i][j] === 2) {
+        //console.log("JE SUIS DANS LE IF"); 
+      }
+      else {
+        this.grille3[i][j] = 1; 
+
+        //changer couleur case 
+        this.status=!this.status; 
+        //console.log("STATUS : " +this.status);
+        //
+
+        this.compteTest = 1; 
+        if (this.compteTest === 1) {
+          break; 
+        }     
+      } 
+    }
+    //Fait disparaître le bouton si la colonne est remplie 
+    if (this.grille3[0][5] === 1 || this.grille3[0][5] === 2) {
+      this.isButtonVisible6 = false; 
+    }
+    //
+    this.turn=!this.turn; 
+    break; 
+  }
+  console.log("1 PION ROUGE PLACÉ !");
+  console.log("New board : " + this.grille3); 
+  console.table(this.grille3);
+}
+
+colonne6Jaune(this:GridComponent) {
+  for (let j = 5 ; ; ) { 
+    for (let i = 5 ; i >=0 ; i--) { 
+      if (this.grille3[i][j] === 1 || this.grille3[i][j] === 2) {
+        //console.log("JE SUIS DANS LE IF"); 
+      }
+      else {
+        this.grille3[i][j] = 2; 
+
+        //changer couleur case 
+        this.status=!this.status; 
+        //console.log("STATUS : " +this.status);
+        //
+
+        this.compteTest = 1; 
+        if (this.compteTest === 1) {
+          break; 
+        }     
+      } 
+    }
+    //Fait disparaître le bouton si la colonne est remplie 
+    if (this.grille3[0][5] === 1 || this.grille3[0][5] === 2) {
+      this.isButtonVisible6 = false; 
+    }
+    //
+    this.turn=!this.turn; 
+    break; 
+  }
+  console.log("1 PION JAUNE PLACÉ !");
+  console.log("New board : " + this.grille3); 
+  console.table(this.grille3);
+}
+
+colonne7Rouge(this:GridComponent) {
+  for (let j = 6 ; ; ) { 
+    for (let i = 5 ; i >=0 ; i--) { 
+      if (this.grille3[i][j] === 1 || this.grille3[i][j] === 2) {
+        //console.log("JE SUIS DANS LE IF"); 
+      }
+      else {
+        this.grille3[i][j] = 1; 
+
+        //changer couleur case 
+        this.status=!this.status; 
+        //console.log("STATUS : " +this.status);
+        //
+
+        this.compteTest = 1; 
+        if (this.compteTest === 1) {
+          break; 
+        }     
+      } 
+    }
+    //Fait disparaître le bouton si la colonne est remplie 
+    if (this.grille3[0][6] === 1 || this.grille3[0][6] === 2) {
+      this.isButtonVisible7 = false; 
+    }
+    //
+    this.turn=!this.turn; 
+    break; 
+  }
+  console.log("1 PION ROUGE PLACÉ !");
+  console.log("New board : " + this.grille3); 
+  console.table(this.grille3);
+}
+
+colonne7Jaune(this:GridComponent) {
+  for (let j = 6 ; ; ) { 
+    for (let i = 5 ; i >=0 ; i--) { 
+      if (this.grille3[i][j] === 1 || this.grille3[i][j] === 2) {
+        //console.log("JE SUIS DANS LE IF"); 
+      }
+      else {
+        this.grille3[i][j] = 2; 
+
+        //changer couleur case 
+        this.status=!this.status; 
+        //console.log("STATUS : " +this.status);
+        //
+
+        this.compteTest = 1; 
+        if (this.compteTest === 1) {
+          break; 
+        }     
+      } 
+    }
+    //Fait disparaître le bouton si la colonne est remplie 
+    if (this.grille3[0][6] === 1 || this.grille3[0][6] === 2) {
+      this.isButtonVisible7 = false; 
+    }
+    //
+    this.turn=!this.turn; 
+    break; 
+  }
+  console.log("1 PION JAUNE PLACÉ !");
+  console.log("New board : " + this.grille3); 
+  console.table(this.grille3);
+}
+//-----------------------------------------------------------------------
+
+  //ngOnInit(): void {
+    //console.log("TEST onInit ok");
+    ////this.initializeTable()
+    //this.grille3 = this.boardservice.emptyGrid; //initialise la grille depuis le service 
+    //console.log("My board looks like this : " + this.grille3); 
+    //console.log("OnInit variable TURN = " + this.turn);
+
+    ////this.case.played = false; 
+    ////this.couleur = "white"; 
+    ////for (let i = 0 ; i < this.col ; i++) {
+     //// this.case.played = false; 
+    ////}
+  ////this.gameState(); 
+  //}
+//---------------------- EN COURS ------------------------------------
+
+  playAgain(grille3:number [][]) {
+    //this.boardservice.playAgain();
+    //this.grille3 = this.boardservice.emptyGrid;
+    //console.table(this.grille3); 
+    console.log("hey");
+    //this.grille3 = this.boardservice.reset; 
+    //this.reset(); 
+    console.table(grille3);
+
+  }
+
+  /*reset(this:GridComponent) {
+    for (let i = 0 ; i < this.col ; i++) {
+      for (let j = 0 ; j < this.row ; j++) {
+        this.grille3[i][j] = 0; 
+      }
+    }
+  } */
+
+
+
+//------------------------------FIN EN COURS -----------------------------
+
+
+
+
+
+
+//------------------------------------------------------------------
+
   //TEST POUR PLACER UN PION 
-  Jouer1R(this:GridComponent) {
-    console.log("J'ai appuyé sur 'Jouer1R'");
+  ////////Jouer1R(this:GridComponent) {
+   //////// console.log("J'ai appuyé sur 'Jouer1R'");
     //Pour changer l'état 0 1 2 
     //this.grille2[0] = this.red; 
     //console.log("New board is : " + this.grille2); 
 
     //Pour changer l'état visuel MARCHE !!! 
-    this.status1 = !this.status1;
-    this.turn = !this.turn;
+   //////// this.status1 = !this.status1;
+   //////// this.turn = !this.turn;
 
    /* if (this.turn) {
       console.log("Tour des rouges");
@@ -96,42 +597,35 @@ export class GridComponent implements OnInit {
       this.status1B != this.status1B; 
       this.turn = !this.turn;
     }*/
+   //////// console.log("MAJ variable TURN = " + this.turn);
+ //////// }
+
+ /* test(this:GridComponent) {
+    console.log("1 pion placé");
+    this.turn = !this.turn; 
     console.log("MAJ variable TURN = " + this.turn);
+  } */
+
+  /*test2(this:GridComponent) {
+    console.log("TEST2");
+    if (this.turn) {
+      this.color = "red"; 
+      this.turn = !this.turn;
+    }
+    else this.color = "yellow"; 
+    this.turn = !this.turn;
   }
 
-  Jouer1Y(this:GridComponent) {
-    console.log("J'ai appuyé sur 'Jouer1Y'");
-    this.status1B = !this.status1B; 
+  test3(this:GridComponent) {
+    console.log("TEST3");
+    if (this.turn) {
+      this.color = "red"; 
+      this.turn = !this.turn;
+    }
+    else this.color = "yellow";
     this.turn = !this.turn; 
-    console.log("MAJ variable TURN = " + this.turn); 
-  }
-  
-
-  Jouer2(this:GridComponent) {
-    console.log("J'ai appuyé sur 'Jouer2");
-    this.status2 = !this.status2;
-    this.turn = !this.turn; 
-
-    //this.status1 = this.status1; 
-
-  }
-
-
-  //Test changer class
-  /*clickEvent(){
-    this.status = !this.status;       
   }*/
-
-}
-
-/*game() {
-  if (this.case.played == false) {
-
-  }
-} */
-
-
-
+//----------------------------------------------------------------
 
 //Initialise board ligne 0 
   /*initializeTable(this:GridComponent) {
@@ -142,24 +636,30 @@ export class GridComponent implements OnInit {
     console.log("My board looks like this : " + this.grille2);
   }*/
 
+  //-----------------Test cliquer sur case----------------------
+/*ngOnInit(): void {
+  this.initializeTable();
+  console.log("My grille looks like this : " + this.grille); 
+}*/
 
+/*initializeTable(this:GridComponent){
+  for(let i=0;i<this.hauteur;i++){
+    this.grille.push(new Array<String>(7))
+    for(let j=0;j<this.taille;j++){
+      this.grille[i][j] = "white";
+    }
+  }
+} */
 
-  /*filterState(this:GridComponent) {
-      if (this.filter === 'all') {
-      return !(this.case.played); 
+//Initialise board ligne 0 
+ /* initializeTable(this:GridComponent) {
+    for (let i = 0 ; i < 6 ; i++) {
+      this.grille.push(new Array<String>(7))
+      for (let j = 0 ; j < 7 ; j++) {
+        this.grille[i][j] = 'white';
+        
       }
-  else if (this.filter === 'active') {
-      return this.todoList.items.filter(item => !item.isDone);
-  }
-  else if (this.filter === 'completed') {
-      return this.todoList.items.filter(item => item.isDone);
-      } 
-  } */
-
-
-
-  /*
-  fireEvent() {
-    this.childEvent.emit('Hey Codevolution');
-  }
-  */
+    }
+  }*/
+//---------------------------------------------------
+}

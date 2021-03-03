@@ -7,6 +7,12 @@ import { ErrComponent } from '../err/err.component';
 import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
 
+import { PlayerService } from 'src/app/services/player.service';
+import { JeuInfos } from 'src/app/interface/jeu-infos';
+import { PlayersInfos } from 'src/app/interface/players-infos';
+import { GridComponent } from '../grid/grid.component';
+
+
 
 @Component({
   selector: 'app-player',
@@ -18,25 +24,35 @@ export class PlayerComponent implements OnInit {
 
   public playerForm: FormGroup; 
 
-  //MatDialog
-  constructor(private fb : FormBuilder, public dialog: MatDialog, private router : Router) { }
+  //
+  public infos: JeuInfos;
+
+  constructor(private fb : FormBuilder, public dialog: MatDialog, private router : Router, playerService: PlayerService) {
+    playerService.getGameDataObservable().subscribe(infos => this.infos = infos );
+   }
 
   ngOnInit() { 
     this.initializeForm();
   }
 
   //ReactiveForm 
-  initializeForm(): void { 
+  /*initializeForm(): void { 
     this.playerForm = this.fb.group({
        pseudo1: '',
        color1: '',
        pseudo2: '',
        color2: ''
     });
+  }*/
+  //simplification
+  initializeForm(): void {
+    this.playerForm = this.fb.group(this.infos.players); 
   }
 
   submitForm() { 
-   console.log(this.playerForm.value);  
+   //console.log("Avant : " + this.playerForm.value); 
+   this.infos.players = this.playerForm.value;
+   //console.log("Après : " + this.infos.players);  
   }
 
   //MatDialog 
@@ -46,8 +62,8 @@ export class PlayerComponent implements OnInit {
   } 
 
   //test
-  goToGame() {
+  /*goToGame() {
     this.router.navigate(['/grid']);
-  }
+  } */
 
 } 

@@ -1,6 +1,3 @@
-<!--<h2>{{"Hello " + name }}</h2>
-<button (click)="fireEvent()">Send Event</button>--> 
-
 <div class="background">
     <!-- MatDialog 
     <div class="text">
@@ -12,43 +9,117 @@
 
     </div> -->
 
-        <!-- TEST CHANGER CLASS 
-        <div class="my_class" (click)="clickEvent()"  
-        [ngClass]="status ? 'success' : 'danger'">                
-         Some content
-        </div> -->
-
-
-        <div class="grid">
-            <table>
-                <tr>
-                    <td *ngIf="turn" class="w" [ngClass]="status1B ? '' : 'y'">1</td>
-                    <td *ngIf="!turn" class="w" [ngClass]="status1 ? 'y' : 'r'">1R</td>
-
-                    <td *ngIf="turn" class="w" [ngClass]="status1B ? '' : 'y'">2</td>
-                    <td *ngIf="!turn" class="w" [ngClass]="status1 ? 'y' : 'r'">2R</td>
-
-
-                    <!--<td *ngIf="status1 ; else changeColor" class="w" [ngClass]="status1 ? '' : 'r'" >1</td>
-                    <ng-template #changeColor>
-                        <td class="w" [ngClass]="status1B ? '' : 'y'" >1yellow</td>
-                    </ng-template>-->
-                    <!--<td class="w" [ngClass]="status2 ? 'r' : 'y'">2</td>-->
-                    <!--<td class="w">3</td>
-                    <td class="w" >Tour rouge</td>-->
-                </tr>
-
-            </table>
+        
+        <!-- TEST RECUP NOM JOUEURS-->
+        <!--<h3>Partie terminée, le gagnant est {{infos.gagnant}}</h3>-->
+        <h4 class="affichage__h4">Players are : {{ infos.players.pseudo1 }} ({{infos.players.color1}}) &  {{ infos.players.pseudo2 }} ({{infos.players.color2}})</h4>
+        
+        <div>
+            <h2 id="equipeR" *ngIf="turn">REDS' TURN </h2>
+            <h2 id="equipeJ" *ngIf="!turn">YELLOWS' TURN</h2>
         </div>
 
-                       <!-- *ngIf="playerForm.value.pseudo1 != playerForm.value.pseudo2 
-                        ; else editingPseudo"-->
 
-        
+    <div class="grille__div">
+        <!--<div class="grid">-->
+            <!------------------------------------------ DÉBUT TEST ---------------------------------------------------------->
+        <table>
+            <tr *ngFor="let ligne of grille3, let m = index">
+                <td class="case" *ngFor="let case of ligne; let n = index" [ngClass]="status ? 'success' : 'danger'">TEST</td>
+            </tr>
+        </table>
+
+    </div>
+                <!--<tr>
+                        <td class="w" (click)="test()" [ngClass]="turn ? '' : 'r'"></td>
+                        <td class="w" (click)="test2()" [ngClass]="{'w': color === 'white', 'r': color === 'red', 'y': color === 'yellow'}"></td>
+                        <td class="w" (click)="test3()" [ngClass]="{'w': color === 'white', 'r': color === 'red', 'y': color === 'yellow'}"></td>
+                        <td class="w" (click)="test()"></td>
+                        <td class="w" (click)="test()"></td>
+                        <td class="w" (click)="test()"></td>
+                        <td class="w" (click)="test()"></td>
+                </tr>-->
+
+                <!------------- ESSAI 10000 --------------------->
+                <!--<tr>
+                    <td class="w" (click)="poseRouge()" [ngClass]="status ? 'r' : 'y'"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            -->
+              <!--  <tr> -->
+                    <!-- MARCHE OKKKKKK met rouge quand clique dessus rond <td (click)="isEmpty=!isEmpty" [ngClass]="isEmpty ? 'w' : 'r'"></td>-->
+                    <!--case1-->
+                   <!-- <td *ngIf="turn" (click)="poseRouge()" [ngClass]="isEmpty ? 'w' : 'r'"></td>
+                    <td *ngIf="!turn" (click)="poseJaune()" [ngClass]="isEmpty ? 'w' : 'y'"></td> -->
+
+                    <!--case2-->
+                   <!-- <td *ngIf="turn" (click)="poseRouge()" [ngClass]="isEmpty ? 'w' : 'r'"></td>
+                    <td *ngIf="!turn" (click)="poseJaune()" [ngClass]="isEmpty ? 'w' : 'y'"></td> -->
+                <!--</tr>-->
+
+                <!------------- FIN ESSAI 10000 --------------------->
+              
+        <!-- affichage pour cliquer sur pion 
+                <tr *ngFor="let ligne of grille; let i = index">
+                    <app-color-case *ngFor="let case1 of ligne; let j = index"></app-color-case>
+                </tr>
+        -->         
 
 
+
+                <!-- Grille initialisée dans ngOnInit -->
+               <!-- <table>
+                    <tr *ngFor="let ligne of grille; let i = index">
+                          <app-color-case click="poserPion" *ngFor="let case of ligne; let j = index" [ngClass]="{'w': color === 'white','r':color==='red','y':color==='yellow'}"></app-color-case>
+                          <app-color-case click="poserPionRouge" *ngFor="let case of ligne; let j = index" [ngClass]="{'w': color === 'white','r':color==='red','y':color==='yellow'}"></app-color-case>
+                          <app-color-case *ngIf="!turn" click="poserPionJaune" *ngFor="let case of ligne; let j = index" [ngClass]="{'w': color === 'white','r':color==='red','y':color==='yellow'}"></app-color-case>-->
+
+                  <!--  </tr>
+                </table>-->
+
+
+
+                <!--COLORE TOUTES LES CASES ROUGES OU JAUNES<tr>
+                    <td class="w" *ngIf="turn" (click)="poseRouge()" [ngClass]="{'w': color === 'white', 'r': color === 'red', 'y': color === 'yellow'}"></td>
+                    <td class="w" *ngIf="!turn" (click)="poseJaune()" [ngClass]="{'w': color === 'white', 'r': color === 'red', 'y': color === 'yellow'}"></td>
+
+                    <td class="w" *ngIf="turn" (click)="poseRouge()" [ngClass]="{'w': color === 'white', 'r': color === 'red', 'y': color === 'yellow'}"></td>
+                    <td class="w" *ngIf="!turn" (click)="poseJaune()" [ngClass]="{'w': color === 'white', 'r': color === 'red', 'y': color === 'yellow'}"></td>
+
+                    <td class="w" *ngIf="turn" (click)="poseRouge()" [ngClass]="{'w': color === 'white', 'r': color === 'red', 'y': color === 'yellow'}"></td>
+                    <td class="w" *ngIf="!turn" (click)="poseJaune()" [ngClass]="{'w': color === 'white', 'r': color === 'red', 'y': color === 'yellow'}"></td>
+                </tr>-->
+
+            <!--</table>-->
+            <!------------------------------------------ FIN ---------------------------------------------------------->
+           
+
+            <!-- solution cliquer sur rond -->
+            <!--<table>
+                <tr *ngFor="let ligne of grille ; let i = index">
+                    <app-color-case click="poserPions" *ngFor="let case of ligne; let j = index"></app-color-case>
+                </tr>-->
+                <!--<tr>
+                    <app-color-case></app-color-case>
+                    <app-color-case></app-color-case>
+                    <app-color-case></app-color-case>
+                    <app-color-case></app-color-case>
+                    <app-color-case></app-color-case>
+                    <app-color-case></app-color-case>
+                    <app-color-case></app-color-case>
+                </tr>
+            </table>-->
+            <!-- -->
+    
+
+    
     <!--<div class="grid">-->
-        <!--<table *ngFor="let case of testPlay()" [ngClass]="(!case.played ? 'w' : 'r')">-->
+        <!--<table *ngFor="let case of grille" [ngClass]="(!case.played ? 'w' : 'r')">-->
             <!--<table>
             <tr>
                 <td id="0" class="w" [(ngModel)]="case.played"></td>
@@ -114,35 +185,52 @@
     </div>-->
 
     <br> 
-
-        <!-- FAIRE LES 7 BOUTONS FLÈCHES -->
-        <div>
-            <button *ngIf="turn" (click)="Jouer1R()">J1 Rouge</button>
-        </div>
-        <div>
-            <button id='0' *ngIf="!turn" (click)="Jouer1Y()">J1 Jaune</button>
-        </div>
-
-
-        
-
-       <!-- <span>
-            <button id='1' (click)="Jouer2()">Jouer2</button>
-        </span> -->
+        <!---------------------- BOUTONS ------------------------>
+            <span *ngIf="this.isButtonVisible1">
+                <button class="play-r" *ngIf="turn" (click)="colonne1Rouge()">Play</button>
+                <button class="play-j" *ngIf="!turn" (click)="colonne1Jaune()">Play</button>
+            </span>
+    
+            <span *ngIf="this.isButtonVisible2">
+                <button class="play-r" *ngIf="turn" (click)="colonne2Rouge()">Play</button>
+                <button class="play-j" *ngIf="!turn" (click)="colonne2Jaune()">Play</button>
+            </span>
+    
+            <span *ngIf="this.isButtonVisible3">
+                <button class="play-r" *ngIf="turn" (click)="colonne3Rouge()">Play</button>
+                <button class="play-j" *ngIf="!turn" (click)="colonne3Jaune()">Play</button>
+            </span>
+    
+            <span *ngIf="this.isButtonVisible4">
+                <button class="play-r" *ngIf="turn" (click)="colonne4Rouge()">Play</button>
+                <button class="play-j" *ngIf="!turn" (click)="colonne4Jaune()">Play</button>
+            </span>
+    
+            <span *ngIf="this.isButtonVisible5">
+                <button class="play-r" *ngIf="turn" (click)="colonne5Rouge()">Play</button>
+                <button class="play-j" *ngIf="!turn" (click)="colonne5Jaune()">Play</button>
+            </span>
+    
+            <span *ngIf="this.isButtonVisible6">
+                <button class="play-r" *ngIf="turn" (click)="colonne6Rouge()">Play</button>
+                <button class="play-j" *ngIf="!turn" (click)="colonne6Jaune()">Play</button>
+            </span>
+    
+            <span *ngIf="this.isButtonVisible7">
+                <button class="play-r" *ngIf="turn" (click)="colonne7Rouge()">Play</button>
+                <button class="play-j" *ngIf="!turn" (click)="colonne7Jaune()">Play</button>
+            </span>
+        <!------------------------------------------------------->
 
     <br>
-<!--
-    <div class="restart">
-        <button class="restartButton" [routerLink]="['/grid']" mat-raised-button>Play again !</button>
-    </div>
 
-    <br>
-
-    <div class="changePlayers">
+    <span class="changePlayers">
         <button class="changeP" [routerLink]="['/player']" mat-raised-button>Change players</button>
-    </div>
+    </span>
 
+    <span class="restart">
+        <button class="restartButton" (click)="playAgain(grille3)" [routerLink]="['/grid']" mat-raised-button>Play again !</button>
+    </span>
 
-
-    -->
+    
 </div>

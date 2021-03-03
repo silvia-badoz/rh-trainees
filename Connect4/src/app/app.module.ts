@@ -27,6 +27,7 @@ import { PlayerComponent } from './game/player/player.component';
 import { GridComponent } from './game/grid/grid.component';
 import { ErrComponent } from './game/err/err.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { ColorCaseComponent } from './game/color-case/color-case.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     PlayerComponent,
     GridComponent,
     ErrComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    ColorCaseComponent
   ],
   //MatDialog
   entryComponents: [ErrComponent],
