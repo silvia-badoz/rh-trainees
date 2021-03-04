@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { GridComponent } from '../grid/grid.component';
+import { PlayerService } from 'src/app/services/player.service';
+import { CaseData } from '../../interface/case-data'; 
 
 @Component({
   selector: 'app-color-case',
@@ -13,16 +15,23 @@ turnP:boolean = true; //true = tour du joueur rouge
 
 
   //------------------------------------
-  constructor() { 
-    this.color = "white"; //essayer avec 0 ?? 
+  constructor(private playerservice: PlayerService) { 
+    //this.color = "white"; //essayer avec 0 ?? 
+    this.pawn = 0;
   }
 
-  public color: "white"|"red"|"yellow"; 
+  @Input() data : CaseData;
+
+  public pawn: 0|1|2;
+  //public color: "white"|"red"|"yellow"; 
 
   ngOnInit(): void {
     console.log("turnP initial = " + this.turnP);
   }
 
+  poserPion(){
+    this.playerservice.placerPion(this.data);
+  }
   // ----------------- test -----------------
   /*poserPions(){
     if (this.turnP) {
@@ -39,7 +48,7 @@ turnP:boolean = true; //true = tour du joueur rouge
   //------------------------------------
 
   
-  poserPionRouge() {
+  /*poserPionRouge() {
     this.color = "red"; 
     console.log("1 pion ROUGE a été posé.");
     this.turnP = false;
@@ -72,5 +81,5 @@ turnP:boolean = true; //true = tour du joueur rouge
    // this.turnP = !this.turnP; 
    
   
-
+*/
 }

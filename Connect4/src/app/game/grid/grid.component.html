@@ -14,19 +14,27 @@
         <!--<h3>Partie terminée, le gagnant est {{infos.gagnant}}</h3>-->
         <h4 class="affichage__h4">Players are : {{ infos.players.pseudo1 }} ({{infos.players.color1}}) &  {{ infos.players.pseudo2 }} ({{infos.players.color2}})</h4>
         
-        <div>
+        <div *ngIf="infos.fin === false">
             <h2 id="equipeR" *ngIf="turn">REDS' TURN </h2>
             <h2 id="equipeJ" *ngIf="!turn">YELLOWS' TURN</h2>
         </div>
-
 
     <div class="grille__div">
         <!--<div class="grid">-->
             <!------------------------------------------ DÉBUT TEST ---------------------------------------------------------->
         <table>
             <tr *ngFor="let ligne of grille3, let m = index">
-                <td class="case" *ngFor="let case of ligne; let n = index" [ngClass]="status ? 'success' : 'danger'">TEST</td>
+                <!--<td class="case" *ngFor="let case of ligne; let n = index" [ngClass]="status ? 'success' : 'danger'">TEST</td>-->
+                <td class="case" *ngFor="let case of ligne, let n = index"  [ngClass]="{'whitePawn': pawn === 0,
+                'redPawn':pawn === 1, 'yellowPawn': pawn === 2}">X</td>
             </tr>
+
+
+                <!--affichage pour cliquer sur pion -->
+                <!--<tr *ngFor="let ligne of grille3; let i = index">
+                    <app-color-case *ngFor="let case1 of ligne; let j = index"></app-color-case>
+                </tr>-->
+        
         </table>
 
     </div>
@@ -64,11 +72,7 @@
 
                 <!------------- FIN ESSAI 10000 --------------------->
               
-        <!-- affichage pour cliquer sur pion 
-                <tr *ngFor="let ligne of grille; let i = index">
-                    <app-color-case *ngFor="let case1 of ligne; let j = index"></app-color-case>
-                </tr>
-        -->         
+           
 
 
 
@@ -186,6 +190,7 @@
 
     <br> 
         <!---------------------- BOUTONS ------------------------>
+        <div *ngIf="this.infos.fin === false">
             <span *ngIf="this.isButtonVisible1">
                 <button class="play-r" *ngIf="turn" (click)="colonne1Rouge()">Play</button>
                 <button class="play-j" *ngIf="!turn" (click)="colonne1Jaune()">Play</button>
@@ -220,17 +225,22 @@
                 <button class="play-r" *ngIf="turn" (click)="colonne7Rouge()">Play</button>
                 <button class="play-j" *ngIf="!turn" (click)="colonne7Jaune()">Play</button>
             </span>
+        </div>
         <!------------------------------------------------------->
+        <div *ngIf="infos.fin === true" class="winner">
+            <h2>WINNER IS : {{ infos.gagnant }}</h2>
+        </div>
 
     <br>
 
     <span class="changePlayers">
-        <button class="changeP" [routerLink]="['/player']" mat-raised-button>Change players</button>
+        <!--<button class="changeP" [routerLink]="['/player']" mat-raised-button>Change players</button>-->
+        <button *ngIf="this.infos.fin === true" class="changeP" (click)="restart()" mat-raised-button>Play again !</button>
     </span>
 
-    <span class="restart">
+    <!--<span class="restart">
         <button class="restartButton" (click)="playAgain(grille3)" [routerLink]="['/grid']" mat-raised-button>Play again !</button>
-    </span>
+    </span>-->
 
     
 </div>

@@ -48,40 +48,9 @@
     margin-right: 8px;
 }
 
-.w {
-    width: 2cm; //50px
-    height: 2cm; //50px 
-    margin: 0px; //5px pour espacer les ronds 
-    padding: 0px;
-    border: 2px blue inset;
-    border-radius: 2cm; //50% = cercle 
-    background-color: white; //
-    //display : inline-block  
-    cursor: pointer;
-}
-
-.r {
-    width: 2cm; //50px
-    height: 2cm; //50px 
-    margin: 0px; //5px pour espacer les ronds 
-    padding: 0px;
-    border: 2px blue inset;
-    border-radius: 2cm; //50% = cercle 
-    background-color: red; //
-    //display : inline-block  
-    cursor: pointer;
-}
-
-.y {
-    width: 2cm; //50px
-    height: 2cm; //50px 
-    margin: 0px; //5px pour espacer les ronds 
-    padding: 0px;
-    border: 2px blue inset;
-    border-radius: 2cm; //50% = cercle 
-    background-color: yellow; //
-    //display : inline-block  
-    cursor: pointer;
+.winner {
+    background-color: black;
+    color: white;
 }
 
 .success {
@@ -122,10 +91,20 @@
     padding: 0px;
     border: 2px blue inset;
     border-radius: 2cm; //50% = cercle 
-    background-color: white; //
+    //background-color: white; //
     
 }
 
 .affichage__h4 {
     font-family: fantasy;
+}
+
+.whitePawn{
+    background-color: white; //
+}
+.redPawn{
+    background-color: red; //
+}
+.yellowPawn{
+    background-color: yellow; //
 }

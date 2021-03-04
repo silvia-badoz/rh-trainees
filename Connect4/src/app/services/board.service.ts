@@ -25,12 +25,21 @@ export class BoardService {
   pseudo2: '',
   color2: ''}});
 
-  //grille3: number[][];
+  grille3: CaseData[][] = [];
 
   constructor() { }
 
   getGameDataObservable(): Observable<JeuInfos> {
     return this.gameSubject.asObservable();
+  }
+
+  initializeBoard(row:number, col:number) {
+    for (let i = 0 ; i < row ; i++) {
+      this.grille3[i] = [];
+      for (let j = 0 ; j < col ; j++) {
+        this.grille3[i][j] = { colonne: j, couleur: 0}; 
+      }
+    }
   }
 
   //test pour playAgain button

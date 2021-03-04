@@ -1,5 +1,8 @@
-<td (click)="poserPion()" [ngClass]="{'whitePawn': color === 'white',
-'redPawn':color==='red','yellowPawn':color==='yellow'}" ></td>
+<!--<td (click)="poserPion()" [ngClass]="{'whitePawn': color === 'white',
+'redPawn':color==='red','yellowPawn':color==='yellow'}" ></td>-->
+
+<td class="case" (click)="poserPion()" [ngClass]="{'whitePawn': pawn === 0,
+'redPawn':pawn === 1, 'yellowPawn': pawn === 2}"></td>
 
 <!--
 <td *ngIf="turnP === true" (click)="poserPionRouge()" [ngClass]="{'w': color === 'white',

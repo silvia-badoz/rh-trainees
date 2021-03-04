@@ -1,4 +1,4 @@
 export interface CaseData {
-    colomn: number; 
-    color: string; 
+    colonne: number; 
+    couleur: number; 
 }
