@@ -73,7 +73,7 @@ export class GridComponent implements OnInit {
     console.table(this.grille3); 
   }
 
-  //TEST change players et remettre le fin a false
+  //bouton play again à la fin d'une partie
   restart() {
     this.infos.fin = false;
     this.infos.gagnant = "";
@@ -87,7 +87,6 @@ export class GridComponent implements OnInit {
     ];
     console.log("GRILLE RENOUVELÉE : " + this.grille3);
   }
-  //fin test 
 
 //fonction qui vérifie si il y a un gagnant rouge en vertical (7 colonnes)
 /* on entre dans cette fonction si le dernier pion rouge placé
@@ -111,13 +110,17 @@ verticaleR() {
               this.infos.gagnant = this.infos.players.pseudo2;
              } 
 
-             alert("GameOver !");            }
+             alert("GameOver by vertical !");            }
         }
       }
     }
   }
 }
 
+//fonction qui vérifie si il y a un gagnant jaune en vertical (7 colonnes)
+/* on entre dans cette fonction si le dernier pion jaune placé
+ * est au minimum sur la 4ème ligne en partant du bas ou plus haut
+ */
 verticaleJ() {
   if (this.ligneP <= 2) {
     if (this.grille3[this.ligneP][this.colonneP] === 2) { //always TRUE 
@@ -136,7 +139,7 @@ verticaleJ() {
               this.infos.gagnant = this.infos.players.pseudo2;
              } 
 
-             alert("GameOver !");
+             alert("GameOver by vertical !");
             }
         }
       }
@@ -144,9 +147,76 @@ verticaleJ() {
   }
 }
 
- /* verifGagnantR(ligneP: number, colonneP: number, redP: number) {
-    this.verticaleR(ligneP, colonneP, redP);
-  } */
+//fonction qui vérifie si il y a un gagnant rouge à l'horizontal 
+horizontaleR() {
+  let count = 0;
+  for (let j = 0 ; j <= this.col ; j++) {
+    if (this.grille3[this.ligneP][j] === 1) {
+      count++;
+    }
+    else count=0; 
+    if (count >= 4) {
+      alert("GameOver by horizontal !");
+      this.infos.fin = true; 
+      if (this.infos.players.color1 === "red") {
+        this.infos.gagnant = this.infos.players.pseudo1;
+       }
+      else {
+        this.infos.gagnant = this.infos.players.pseudo2;
+      } 
+    }
+  }
+}
+
+//fonction qui vérifie si il y a un gagnant jaune à l'horizontal 
+horizontaleJ() {
+  let count = 0;
+  for (let j = 0 ; j <= this.col ; j++) {
+    if (this.grille3[this.ligneP][j] === 2) {
+      count++;
+    }
+    else count=0; 
+    if (count >= 4) {
+      alert("GameOver by horizontal !");
+      this.infos.fin = true; 
+      if (this.infos.players.color1 === "yellow") {
+        this.infos.gagnant = this.infos.players.pseudo1;
+       }
+      else {
+        this.infos.gagnant = this.infos.players.pseudo2;
+      } 
+    }
+  }
+}
+
+diagonaleR() {
+  let count = 0;
+  let gap = this.ligneP - this.colonneP;
+  for (let i = Math.max(gap, 0); i < Math.min(this.row, this.col + gap); i++) {
+    if (this.grille3[this.ligneP][(this.ligneP - gap)] == 1) {
+      count++;
+    }
+    else {
+      count = 0;
+    }
+    if (count >= 4) {
+      alert("GameOver by red diagonal !");
+    }
+  }
+}
+
+verifGagnantR() {
+    this.verticaleR();
+    this.horizontaleR();
+    this.diagonaleR();
+} 
+
+verifGagnantJ() {
+  this.verticaleJ();
+  this.horizontaleJ();
+}
+
+
 
 //--------------------- FONCTIONS POUR PLACER LES PIONS DANS GRILLE3 -----------------------------------------
 colonne1Rouge(this:GridComponent) { 
@@ -158,7 +228,7 @@ colonne1Rouge(this:GridComponent) {
         this.grille3[i][j] = 1; //1 vaut 1 pion rouge
         this.ligneP = i; 
         this.colonneP = j;
-        this.verticaleR();
+        this.verifGagnantR();
         
         //changer couleur case 
         //this.status=!this.status; 
@@ -202,7 +272,7 @@ colonne1Jaune(this:GridComponent) {
         this.grille3[i][j] = 2; //2 vaut 1 pion jaune
         this.ligneP = i;
         this.colonneP = j;
-        this.verticaleJ();
+        this.verifGagnantJ();
 
         //changer couleur case
         this.status=!this.status; 
@@ -238,8 +308,8 @@ for (let j = 1 ; ; ) {
         this.grille3[i][j] = 1;
         this.ligneP = i;
         this.colonneP = j; 
-        this.verticaleR(); 
-    
+        this.verifGagnantR();
+
         //changer couleur case 
         //this.status=!this.status; 
         //console.log("STATUS : " +this.status);
@@ -273,7 +343,7 @@ colonne2Jaune(this:GridComponent) {
         this.grille3[i][j] = 2; 
         this.ligneP = i;
         this.colonneP = j;
-        this.verticaleJ();
+        this.verifGagnantJ();
         //changer couleur case 
         this.status=!this.status; 
         //console.log("STATUS : " +this.status);
@@ -308,8 +378,8 @@ colonne3Rouge(this:GridComponent) {
           this.grille3[i][j] = 1; 
           this.ligneP = i;
           this.colonneP = j;
-          this.verticaleR();
-         
+          this.verifGagnantR();
+
           //changer couleur case 
           //this.status=!this.status; 
           //console.log("STATUS : " +this.status);
@@ -343,7 +413,7 @@ colonne3Jaune(this:GridComponent) {
             this.grille3[i][j] = 2; 
             this.ligneP = i;
             this.colonneP = j;
-            this.verticaleJ();
+            this.verifGagnantJ();
             //changer couleur case 
             this.status=!this.status; 
             //console.log("STATUS : " +this.status);
@@ -378,8 +448,8 @@ colonne4Rouge(this:GridComponent) {
         this.grille3[i][j] = 1; 
         this.ligneP = i;
         this.colonneP = j;
-        this.verticaleR();
-             
+        this.verifGagnantR();
+
         //changer couleur case 
         //this.status=!this.status; 
         //console.log("STATUS : " +this.status);
@@ -413,7 +483,7 @@ colonne4Jaune(this:GridComponent) {
                 this.grille3[i][j] = 2; 
                 this.ligneP = i;
                 this.colonneP = j;
-                this.verticaleJ();
+                this.verifGagnantJ();
                 //changer couleur case 
                 this.status=!this.status; 
                 //console.log("STATUS : " +this.status);
@@ -448,8 +518,8 @@ colonne5Rouge(this:GridComponent) {
         this.grille3[i][j] = 1; 
         this.ligneP = i;
         this.colonneP = j;
-        this.verticaleR();               
-            
+        this.verifGagnantR();
+
         //changer couleur case 
         //this.status=!this.status; 
         //console.log("STATUS : " +this.status);
@@ -483,7 +553,7 @@ colonne5Jaune(this:GridComponent) {
                     this.grille3[i][j] = 2; 
                     this.ligneP = i;
                     this.colonneP = j;
-                    this.verticaleJ();
+                    this.verifGagnantJ();
                     //changer couleur case 
                     this.status=!this.status; 
                     //console.log("STATUS : " +this.status);
@@ -518,7 +588,7 @@ colonne6Rouge(this:GridComponent) {
         this.grille3[i][j] = 1; 
         this.ligneP = i;
         this.colonneP = j;
-        this.verticaleR();
+        this.verifGagnantR();
 
         //changer couleur case 
         //this.status=!this.status; 
@@ -554,7 +624,7 @@ colonne6Jaune(this:GridComponent) {
         this.grille3[i][j] = 2; 
         this.ligneP = i;
         this.colonneP = j;
-        this.verticaleJ();
+        this.verifGagnantJ();
         //changer couleur case 
         this.status=!this.status; 
         //console.log("STATUS : " +this.status);
@@ -589,8 +659,8 @@ colonne7Rouge(this:GridComponent) {
         this.grille3[i][j] = 1; 
         this.ligneP = i;
         this.colonneP = j;
-        this.verticaleR();
-    
+        this.verifGagnantR();
+
         //changer couleur case 
         this.status=!this.status; 
         //console.log("STATUS : " +this.status);
@@ -625,7 +695,7 @@ colonne7Jaune(this:GridComponent) {
         this.grille3[i][j] = 2; 
         this.ligneP = i;
         this.colonneP = j;
-        this.verticaleJ();
+        this.verifGagnantJ();
         //changer couleur case 
         this.status=!this.status; 
         //console.log("STATUS : " +this.status);
