@@ -12,7 +12,7 @@ app.use(requireHTTPS);
 app.use(express.static('./dist/connect4-rh-trainees'));
 
 app.get('/*', function(req, res) {
-    res.sendFile('index.html', {root: 'dist/connect4-rh-trainees/'}
+    res.sendFile('index.html', {root: 'dist/connect4-rh-trainees/src/'}
   );
   });
 app.listen(process.env.PORT || 8080);
