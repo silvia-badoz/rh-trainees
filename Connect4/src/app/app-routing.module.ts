@@ -13,7 +13,6 @@ const routes: Routes = [
   { path: 'choice', component: ChoiceComponent },
   { path: 'player', component: PlayerComponent },
   { path: 'grid', component: GridComponent }, 
-  //{ path: 'yourTodoList', component: TodoListComponent },
 
   { path: '', redirectTo: '/choice', pathMatch: 'full' },
   { path: '**', redirectTo: '/choice', }

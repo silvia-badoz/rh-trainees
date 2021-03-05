@@ -1,9 +1,9 @@
 {
-  "name": "connect4",
+  "name": "connect4-rh-trainees",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -23,6 +23,7 @@
     "@angular/router": "~11.0.3",
     "@ngxs/store": "^3.7.1",
     "angular-material": "^1.2.2",
+    "express": "^4.17.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

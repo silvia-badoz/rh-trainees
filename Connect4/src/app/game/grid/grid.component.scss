@@ -48,17 +48,20 @@
     margin-right: 8px;
 }
 
-.winner {
+.play-g {
+    background-color: grey;
+    margin: 0 auto;
+    cursor: pointer;
+    font-size: 22px;
+    padding: 6px 14px;
+    border-radius: 40px;
+    margin-right: 8px;
+}
+
+.infos {
     background-color: black;
     color: white;
-}
-
-.success {
-    color: green;
-}
-
-.danger {
-    color: red;
+    font-family: fantasy;
 }
 
 #equipeR {
@@ -95,16 +98,12 @@
     
 }
 
-.affichage__h4 {
-    font-family: fantasy;
-}
-
 .whitePawn{
-    background-color: white; //
+    background-color: white; 
 }
 .redPawn{
-    background-color: red; //
+    background-color: red; 
 }
 .yellowPawn{
-    background-color: yellow; //
+    background-color: yellow; 
 }

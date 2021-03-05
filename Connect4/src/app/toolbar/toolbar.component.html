@@ -1,6 +1,6 @@
 <mat-sidenav-container>
 
-
+  <!-- dark/light mode choice -->
     <mat-sidenav #sideNav mode="push" position="end">
       <mat-toolbar color="warn">
         <h1>Settings</h1>
@@ -14,21 +14,16 @@
 
     <mat-sidenav-content>
   
-    <!-- ma toolbar -->
-      <mat-toolbar color="primary" role="heading" class="toolbar"> <!-- possible attribute for color : primary, accent, warn-->
+      <mat-toolbar role="heading" class="toolbar"> <!-- possible attribute for color : primary, accent, warn-->
         <span class="title">{{ title }}</span>
       <!-- ajout pour dark/light mode -->
       <div style="flex: 1 1 auto;"></div>
 			<button mat-icon-button (click)="sideNav.toggle()">
                 <mat-icon>menu</mat-icon>
             </button>
-      <!-- -->
-    </mat-toolbar>
+      </mat-toolbar>
 
-    <!--<a class="card-wrapper" href="#">TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST</a>-->
-    <a href="#player">
       <router-outlet></router-outlet>
-    </a>
 
   </mat-sidenav-content>
 

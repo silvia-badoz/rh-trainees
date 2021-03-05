@@ -6,7 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ErrComponent } from '../err/err.component';
 import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
-
+//Dark/light mode 
 import { ColorSchemeService } from 'src/app/services/color-scheme-service.service';
 
 import { PlayerService } from 'src/app/services/player.service';
@@ -26,8 +26,6 @@ import { RulesComponent } from 'src/app/rules/rules.component';
 export class PlayerComponent implements OnInit {
 
   public playerForm: FormGroup; 
-
-  //
   public infos: JeuInfos;
 
   constructor(private fb : FormBuilder, public dialog: MatDialog, public dialogR: MatDialog, private router : Router, playerService: PlayerService, private colorSchemeService: ColorSchemeService) {
@@ -60,17 +58,9 @@ export class PlayerComponent implements OnInit {
   //MatDialog 
   openDialog() {
     this.dialog.open(ErrComponent);
-    this.router.navigate(['/player']);
   } 
-
   openRules() {
     this.dialogR.open(RulesComponent);
-    this.router.navigate(['/rules']);
   }
-
-  //test
-  /*goToGame() {
-    this.router.navigate(['/grid']);
-  } */
 
 } 

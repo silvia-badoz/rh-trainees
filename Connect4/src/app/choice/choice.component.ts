@@ -21,8 +21,6 @@ export class ChoiceComponent implements OnInit {
 
   openRules() {
     this.dialogR.open(RulesComponent);
-    this.router.navigate(['/rules']);
-
   }
 
 }
