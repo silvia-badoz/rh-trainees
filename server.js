@@ -21,7 +21,7 @@ app.get('/*', function(req, res) {
 */
 
 
-
+/*
 //Install express server
 const express = require('express');
 const path = require('path');
@@ -41,3 +41,21 @@ res.sendFile(path.join(__dirname+'/dist/connect4-rh-trainees/index.html'));
 
 // Start the app by listening on the default Heroku port
 app.listen(process.env.PORT || 8080); 
+*/
+
+//Install express server
+const express = require('express');
+const path = require('path');
+
+const app = express();
+
+// Serve only the static files form the angularapp directory
+app.use(express.static(__dirname + '/connect4-rh-trainees'));
+
+app.get('/*', function(req,res) {
+
+res.sendFile(path.join(__dirname+'/connect4-rh-trainees/index.html'));
+});
+
+// Start the app by listening on the default Heroku port
+app.listen(process.env.PORT || 8080);
