@@ -16,3 +16,25 @@
     font-size: 40px;
     margin: 0 auto;
 }
+
+/* dark/light mode */
+.mat-sidenav-container {
+    height: 100%;
+}
+
+.mat-sidenav {
+    width: 320px;
+}
+
+.card-wrapper {
+    width: calc(100% - 48px);
+    max-width: 460px;
+    margin: 24px auto;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  
+    text-decoration: none;
+  }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ColorSchemeService } from 'src/app/services/color-scheme-service.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Connect4';
+
+  constructor(private colorSchemeService: ColorSchemeService) {
+    this.colorSchemeService.load();
+  }
+
 }

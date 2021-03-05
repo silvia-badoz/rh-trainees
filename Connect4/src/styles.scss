@@ -1,5 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+@include mat-core();
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+$inside-primary: mat-palette($mat-light-blue);
+$inside-accent: mat-palette($mat-light-blue);
+$inside-warn: mat-palette($mat-red);
+$inside-theme-dark: mat-dark-theme($inside-primary, $inside-accent, $inside-warn);
+$inside-theme-light: mat-light-theme($inside-primary, $inside-accent, $inside-warn);
+
+.color-scheme-dark {
+    @include angular-material-theme($inside-theme-dark);
+    // Example how you can easy add own custom styles
+    .card-wrapper {
+        color: #d0d0d0;
+    }
+}
+
+.color-scheme-light {
+    @include angular-material-theme($inside-theme-light);
+    // Example how you can easy add own custom styles
+    .card-wrapper {
+        color: #2d2d2d;
+    }
+}

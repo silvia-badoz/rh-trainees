@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ColorSchemeService } from 'src/app/services/color-scheme-service.service';
+
 
 @Component({
   selector: 'app-toolbar',
@@ -8,7 +10,9 @@ import { Component, OnInit } from '@angular/core';
 export class ToolbarComponent implements OnInit {
 title = 'Connect4';
 
-  constructor() { }
+  constructor(private colorSchemeService: ColorSchemeService) { 
+    this.colorSchemeService.load();
+  }
 
   ngOnInit(): void {
   }

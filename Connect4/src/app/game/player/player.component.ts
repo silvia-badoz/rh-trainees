@@ -7,6 +7,8 @@ import { ErrComponent } from '../err/err.component';
 import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
 
+import { ColorSchemeService } from 'src/app/services/color-scheme-service.service';
+
 import { PlayerService } from 'src/app/services/player.service';
 import { JeuInfos } from 'src/app/interface/jeu-infos';
 import { PlayersInfos } from 'src/app/interface/players-infos';
@@ -28,8 +30,9 @@ export class PlayerComponent implements OnInit {
   //
   public infos: JeuInfos;
 
-  constructor(private fb : FormBuilder, public dialog: MatDialog, public dialogR: MatDialog, private router : Router, playerService: PlayerService) {
+  constructor(private fb : FormBuilder, public dialog: MatDialog, public dialogR: MatDialog, private router : Router, playerService: PlayerService, private colorSchemeService: ColorSchemeService) {
     playerService.getGameDataObservable().subscribe(infos => this.infos = infos );
+    this.colorSchemeService.load(); 
    }
 
   ngOnInit() { 

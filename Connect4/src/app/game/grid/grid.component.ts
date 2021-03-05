@@ -5,6 +5,8 @@ import { BoardService } from 'src/app/services/board.service';
 //import EventEmitter = require('events');
 import { ColorCaseComponent } from '../color-case/color-case.component';
 
+import { ColorSchemeService } from 'src/app/services/color-scheme-service.service';
+
 import { PlayerService } from 'src/app/services/player.service';
 import { CaseData } from 'src/app/interface/case-data';
 import { JeuInfos } from 'src/app/interface/jeu-infos';
@@ -59,8 +61,9 @@ export class GridComponent implements OnInit {
   
 
   //constructor(public boardservice: BoardService) { }
-  constructor(public boardservice: BoardService, playerService: PlayerService) { 
+  constructor(public boardservice: BoardService, playerService: PlayerService, private colorSchemeService: ColorSchemeService) { 
     playerService.getGameDataObservable().subscribe(infos => this.infos = infos );
+    this.colorSchemeService.load();
    // playerService.initializeBoard(this.row, this.col);
     this.pawn = 0;
   }
@@ -190,7 +193,102 @@ horizontaleJ() {
 }
 
 diagonaleR() {
- //if ()
+  let align:number = 0;
+  let debC: number = this.colonneP - 3; 
+  let finC: number = this.colonneP + 3;
+  let debL: number = this.ligneP + 3;
+  let finL: number = this.ligneP - 3;
+
+  while (debL >= this.grille3.length || debC < 0) {
+    debL--;
+    debC++;
+  }
+  while (finL < 0 || finC >= this.grille3[0].length) {
+    finL++;
+    finC--;
+  }
+
+  console.log("debC : " + debC + "finC : " + finC + "debL : " + debL + "finL : " + finL);
+
+  while (debL >= finL && debC <= finC && align < 4) {
+    if (this.grille3[debL][debC] == 1) {
+      align++;
+    }
+    else {
+      align = 0;
+    }
+
+    debC++;
+    debL--; 
+  }
+  if (align >= 4) {
+    alert("GameOver by RED DIAGONAL");
+    this.infos.fin = true;
+    if (this.infos.players.color1 === "red") {
+      this.infos.gagnant = this.infos.players.pseudo1;
+     }
+    else {
+      this.infos.gagnant = this.infos.players.pseudo2;
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /*for (let j = 3 ; j >= 0 ; j--) {
+    for (let i = 0; i < this.row ; i++) {
+      if (this.grille3[i][j] == 1) {
+        align++;
+        console.log("ALIGN = " + align);
+        if (align >= 4) {
+          alert(("GameOver by red diagonal on 3 3"));
+        }
+      }
+    }
+  }*/
+  /*if (this.colonneP == 3 && this.ligneP <= 2) {
+    if (this.grille3[this.ligneP][this.colonneP] == 1) {
+      align++;
+      console.log("ALIGN = " + align);
+      console.log("PREMIÈRE BOUCLE");
+      this.ligneP++;
+      this.colonneP--; 
+      if (this.grille3[this.ligneP][this.colonneP] == 1) {
+        align++;
+        console.log("ALIGN = " + align);
+        this.ligneP++;
+        this.colonneP--;
+        if (this.grille3[this.ligneP][this.colonneP] == 1) {
+          align++;
+          console.log("ALIGN = " + align);
+          this.ligneP++;
+          this.colonneP--;
+          if (this.grille3[this.ligneP][this.colonneP] == 1) {
+            //4 pions alignés diagonale
+            this.infos.fin = true; 
+            if (this.infos.players.color1 === "red") {
+              this.infos.gagnant = this.infos.players.pseudo1;
+            }
+            else {
+              this.infos.gagnant = this.infos.players.pseudo2;
+            }
+            alert("GameOver RED DIAGONAL");
+          }
+        }
+      }
+    }
+  }*/
+
 }
 
 drawR() { //finit le jeu quand tous les pions rouges ont été posés

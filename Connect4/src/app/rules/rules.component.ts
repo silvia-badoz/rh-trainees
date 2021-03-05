@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ColorSchemeService } from 'src/app/services/color-scheme-service.service';
+
 
 @Component({
   selector: 'app-rules',
@@ -7,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RulesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private colorSchemeService: ColorSchemeService) {
+    this.colorSchemeService.load();
+   }
 
   ngOnInit(): void {
   }
