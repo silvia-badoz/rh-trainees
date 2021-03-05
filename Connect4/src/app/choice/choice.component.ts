@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { RulesComponent } from 'src/app/rules/rules.component';
+import { MatDialog } from '@angular/material/dialog'; 
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-choice',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChoiceComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialogR: MatDialog, private router : Router) { }
 
   ngOnInit(): void {
+  }
+
+  openRules() {
+    this.dialogR.open(RulesComponent);
+    this.router.navigate(['/rules']);
+
   }
 
 }

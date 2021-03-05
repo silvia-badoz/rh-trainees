@@ -42,7 +42,7 @@ import { ColorCaseComponent } from './game/color-case/color-case.component';
     ColorCaseComponent
   ],
   //MatDialog
-  entryComponents: [ErrComponent],
+  entryComponents: [ErrComponent, RulesComponent], 
   imports: [
     BrowserModule,
     AppRoutingModule,

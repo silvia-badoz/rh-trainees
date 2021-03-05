@@ -11,6 +11,7 @@ import { PlayerService } from 'src/app/services/player.service';
 import { JeuInfos } from 'src/app/interface/jeu-infos';
 import { PlayersInfos } from 'src/app/interface/players-infos';
 import { GridComponent } from '../grid/grid.component';
+import { RulesComponent } from 'src/app/rules/rules.component';
 
 
 
@@ -27,7 +28,7 @@ export class PlayerComponent implements OnInit {
   //
   public infos: JeuInfos;
 
-  constructor(private fb : FormBuilder, public dialog: MatDialog, private router : Router, playerService: PlayerService) {
+  constructor(private fb : FormBuilder, public dialog: MatDialog, public dialogR: MatDialog, private router : Router, playerService: PlayerService) {
     playerService.getGameDataObservable().subscribe(infos => this.infos = infos );
    }
 
@@ -50,9 +51,7 @@ export class PlayerComponent implements OnInit {
   }
 
   submitForm() { 
-   //console.log("Avant : " + this.playerForm.value); 
    this.infos.players = this.playerForm.value;
-   //console.log("Après : " + this.infos.players);  
   }
 
   //MatDialog 
@@ -60,6 +59,11 @@ export class PlayerComponent implements OnInit {
     this.dialog.open(ErrComponent);
     this.router.navigate(['/player']);
   } 
+
+  openRules() {
+    this.dialogR.open(RulesComponent);
+    this.router.navigate(['/rules']);
+  }
 
   //test
   /*goToGame() {

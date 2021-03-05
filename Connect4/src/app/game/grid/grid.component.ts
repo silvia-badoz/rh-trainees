@@ -50,8 +50,8 @@ export class GridComponent implements OnInit {
   public col = 7; 
   public row = 6; 
   redPawns: number = 21;
-  //yellowPawns:number = 21;  
-  //winner:boolean = false;
+  yellowPawns:number = 21;  
+
   //service
   grille3: number[][]; 
 
@@ -190,18 +190,22 @@ horizontaleJ() {
 }
 
 diagonaleR() {
-  let count = 0;
-  let gap = this.ligneP - this.colonneP;
-  for (let i = Math.max(gap, 0); i < Math.min(this.row, this.col + gap); i++) {
-    if (this.grille3[this.ligneP][(this.ligneP - gap)] == 1) {
-      count++;
-    }
-    else {
-      count = 0;
-    }
-    if (count >= 4) {
-      alert("GameOver by red diagonal !");
-    }
+ //if ()
+}
+
+drawR() { //finit le jeu quand tous les pions rouges ont été posés
+  if (this.redPawns == 0) {
+    this.infos.fin = true;
+    alert("Game ended in a tie");
+    this.infos.gagnant = "No one";
+  }
+}
+
+drawY() { //finit le jeu quand tous les pions jaunes ont été posés
+  if (this.yellowPawns == 0) {
+    this.infos.fin = true;
+    alert("Game ended in a tie");
+    this.infos.gagnant = "No one";
   }
 }
 
@@ -209,11 +213,13 @@ verifGagnantR() {
     this.verticaleR();
     this.horizontaleR();
     this.diagonaleR();
+    this.drawR();
 } 
 
 verifGagnantJ() {
   this.verticaleJ();
   this.horizontaleJ();
+  this.drawY();
 }
 
 
@@ -228,6 +234,7 @@ colonne1Rouge(this:GridComponent) {
         this.grille3[i][j] = 1; //1 vaut 1 pion rouge
         this.ligneP = i; 
         this.colonneP = j;
+        this.redPawns--; //to determine if there is a draw
         this.verifGagnantR();
         
         //changer couleur case 
@@ -272,8 +279,8 @@ colonne1Jaune(this:GridComponent) {
         this.grille3[i][j] = 2; //2 vaut 1 pion jaune
         this.ligneP = i;
         this.colonneP = j;
+        this.yellowPawns--;
         this.verifGagnantJ();
-
         //changer couleur case
         this.status=!this.status; 
         //console.log("STATUS : " +this.status);
@@ -308,8 +315,8 @@ for (let j = 1 ; ; ) {
         this.grille3[i][j] = 1;
         this.ligneP = i;
         this.colonneP = j; 
+        this.redPawns--;
         this.verifGagnantR();
-
         //changer couleur case 
         //this.status=!this.status; 
         //console.log("STATUS : " +this.status);
@@ -343,7 +350,9 @@ colonne2Jaune(this:GridComponent) {
         this.grille3[i][j] = 2; 
         this.ligneP = i;
         this.colonneP = j;
+        this.yellowPawns--;
         this.verifGagnantJ();
+        
         //changer couleur case 
         this.status=!this.status; 
         //console.log("STATUS : " +this.status);
@@ -378,8 +387,10 @@ colonne3Rouge(this:GridComponent) {
           this.grille3[i][j] = 1; 
           this.ligneP = i;
           this.colonneP = j;
+          this.redPawns--;
           this.verifGagnantR();
-
+          
+          
           //changer couleur case 
           //this.status=!this.status; 
           //console.log("STATUS : " +this.status);
@@ -413,7 +424,9 @@ colonne3Jaune(this:GridComponent) {
             this.grille3[i][j] = 2; 
             this.ligneP = i;
             this.colonneP = j;
+            this.yellowPawns--;
             this.verifGagnantJ();
+            
             //changer couleur case 
             this.status=!this.status; 
             //console.log("STATUS : " +this.status);
@@ -448,8 +461,9 @@ colonne4Rouge(this:GridComponent) {
         this.grille3[i][j] = 1; 
         this.ligneP = i;
         this.colonneP = j;
+        this.redPawns--;
         this.verifGagnantR();
-
+       
         //changer couleur case 
         //this.status=!this.status; 
         //console.log("STATUS : " +this.status);
@@ -483,7 +497,9 @@ colonne4Jaune(this:GridComponent) {
                 this.grille3[i][j] = 2; 
                 this.ligneP = i;
                 this.colonneP = j;
+                this.yellowPawns--;
                 this.verifGagnantJ();
+               
                 //changer couleur case 
                 this.status=!this.status; 
                 //console.log("STATUS : " +this.status);
@@ -518,8 +534,9 @@ colonne5Rouge(this:GridComponent) {
         this.grille3[i][j] = 1; 
         this.ligneP = i;
         this.colonneP = j;
+        this.redPawns--;
         this.verifGagnantR();
-
+        
         //changer couleur case 
         //this.status=!this.status; 
         //console.log("STATUS : " +this.status);
@@ -553,7 +570,9 @@ colonne5Jaune(this:GridComponent) {
                     this.grille3[i][j] = 2; 
                     this.ligneP = i;
                     this.colonneP = j;
+                    this.yellowPawns--;
                     this.verifGagnantJ();
+                  
                     //changer couleur case 
                     this.status=!this.status; 
                     //console.log("STATUS : " +this.status);
@@ -588,8 +607,9 @@ colonne6Rouge(this:GridComponent) {
         this.grille3[i][j] = 1; 
         this.ligneP = i;
         this.colonneP = j;
+        this.redPawns--;
         this.verifGagnantR();
-
+      
         //changer couleur case 
         //this.status=!this.status; 
         //console.log("STATUS : " +this.status);
@@ -624,7 +644,9 @@ colonne6Jaune(this:GridComponent) {
         this.grille3[i][j] = 2; 
         this.ligneP = i;
         this.colonneP = j;
+        this.yellowPawns--;
         this.verifGagnantJ();
+       
         //changer couleur case 
         this.status=!this.status; 
         //console.log("STATUS : " +this.status);
@@ -659,8 +681,9 @@ colonne7Rouge(this:GridComponent) {
         this.grille3[i][j] = 1; 
         this.ligneP = i;
         this.colonneP = j;
+        this.redPawns--;
         this.verifGagnantR();
-
+        
         //changer couleur case 
         this.status=!this.status; 
         //console.log("STATUS : " +this.status);
@@ -695,7 +718,9 @@ colonne7Jaune(this:GridComponent) {
         this.grille3[i][j] = 2; 
         this.ligneP = i;
         this.colonneP = j;
+        this.yellowPawns--;
         this.verifGagnantJ();
+       
         //changer couleur case 
         this.status=!this.status; 
         //console.log("STATUS : " +this.status);
