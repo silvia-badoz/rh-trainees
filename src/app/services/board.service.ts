@@ -42,14 +42,4 @@ export class BoardService {
     }
   }
 
-  //test pour playAgain button
-  playAgain() {
-    const inf = this.gameSubject.getValue(); 
-    console.log("I'm in button play again");
-    console.log("gameSubject.getValue() = " + this.gameSubject.getValue());
-    //this.gameSubject.next({ gagnant: "", fin: false, inf.players });
-    //this.grille3 = this.emptyGrid; 
-    //console.table(this.grille3);
-  
-  }
 }

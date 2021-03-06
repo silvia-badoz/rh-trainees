@@ -31,24 +31,10 @@ export class PlayerService {
         this.grille3[i][j] = { colonne: j, couleur: 0}; 
       }
     }
-    //
-    /*for (let i = 0; i < hauteur; i++) {
-      this.grille[i] = [];
-      for (let j = 0; j < taille; j++) {
-        this.grille[i][j] = { colonne: j, couleur: "white" };
-
-      }
-
-    }*/
-  }
-
-  placerPion(data: CaseData) {
-    //this.grille4[i][j].couleur = 1; 
   }
 
 
-
-  /*getPlayers(){
+  getPlayers(){
     
-  }*/ 
+  }
 }

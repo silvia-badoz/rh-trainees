@@ -27,14 +27,11 @@ export class GridComponent implements OnInit {
   color2: ''}});
 
   turn:boolean = true; //True = tour du player rouge
-  //status:boolean = false; 
   comptePlacement = 0; //placer 1 seul pion à la fois
 
-  //test récup coordonnées 
+  //récupérer coordonnées 
   colonneP: number; 
   ligneP: number; 
-  //colorP: number;
-  //redP1: number; 
 
   //hide play button when col is full
   isButtonVisible1 = true; 
@@ -45,7 +42,7 @@ export class GridComponent implements OnInit {
   isButtonVisible6 = true;
   isButtonVisible7 = true;
 
-
+  //dimensions de la grille
   public col = 7; 
   public row = 6; 
   redPawns: number = 21;
@@ -53,17 +50,11 @@ export class GridComponent implements OnInit {
 
   //service
   grille3: number[][]; 
-
-  public case: CaseData; 
   
-
   constructor(public boardservice: BoardService, playerService: PlayerService, private colorSchemeService: ColorSchemeService) { 
     playerService.getGameDataObservable().subscribe(infos => this.infos = infos );
     this.colorSchemeService.load();
-    this.pawn = 0;
   }
-
-  public pawn: 0|1|2;
 
   ngOnInit():void {
     this.grille3 = this.boardservice.emptyGrid; //initialise la grille à 0 (white) dans chaque case depuis le service
@@ -313,7 +304,7 @@ colonne(this:GridComponent, couleur: number, colonne: number) {
     this.isButtonVisible7 = false;
   }
 
-  this.turn = !this.turn; // passer au tour du joueur rouge/jaune
+  this.turn = !this.turn; //passer au tour du joueur rouge/jaune
 
   console.log("1 PION PLACÉ :"); 
   console.log("New board : " + this.grille3);

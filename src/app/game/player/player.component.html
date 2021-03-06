@@ -48,45 +48,14 @@
 
         <br>
 
-            <!--<button class="rulesButton" [routerLink]="['/rules']" mat-raised-button>Rules</button>-->
-            <button mat-raised-button class="rulesButton" (click)="openRules()">Rules</button>
+            <button mat-raised-button class="rulesButton" (click)="openRules()">Rules</button> 
 
-            <!-- MAT DIALOG conditions formulaire joueurs -->
-            <!--<button type="button" class="playButton" mat-raised-button *ngIf="playerForm.value.pseudo1 != playerForm.value.pseudo2 && playerForm.value.pseudo2 != ''; else editingPseudo" (click)="goToGame()">Play !</button>
-            <ng-template #editingPseudo>
-                <button type="button" class="playButton" (click)="openDialog()">Play !</button>
-            </ng-template>
-              -------------->    
-
-            <!-- TEST -------------------->
             <button type="button" class="playButton" [routerLink]="['/grid']" mat-raised-button *ngIf="playerForm.value.pseudo1 != playerForm.value.pseudo2 && playerForm.value.pseudo2 != ''; else editingPseudo" (click)="submitForm()">Play !</button>
             <ng-template #editingPseudo>
                 <button type="button" class="playButton" (click)="openDialog()">Play !</button>
             </ng-template>
-            <!--   ------------>
         </form>
-       
-        <!-- test -->
-       <!-- <h1>{{ playerForm.value.pseudo }}</h1>
-        <h2>{{ playerForm.value.color }}</h2>
-
-        <h3>Ceci est dans Player Component <ng-content></ng-content></h3> -->
-
-       <!--<app-grid>Bonjour</app-grid> -->
-
-  
-        <!--h1>test 1</h1>
-   
-        <input type="text" class="form-control" [(ngModel)]="playerForm.value.pseudo">
-        <h4>Player : {{ playerForm.value.pseudo }}</h4>--> 
-      
-        <!--<h2>test 2</h2>
-        <app-grid (childEvent)="message=$event" [parentData]="name"> </app-grid>
-        <h1>{{ message }}</h1>-->
     
-
-
-
     </div>
 
 </div>
